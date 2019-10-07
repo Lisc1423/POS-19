@@ -8,7 +8,8 @@ void cmd_hello_func(int argc,char *argv[])  //hello
 {
   uprintf("hello world");
 }
-/*       FLAG
+/*       
+*       FLAG
 *       功能：设置readflag ：主函数输出位置信息  
 *       参数：read [0/1]  （1打开，其余数关闭）
 */
@@ -118,7 +119,7 @@ void cmd_setxy_func(int argc,char *argv[])
   triangle.y = atof(argv[2]);
   uprintf("xy已经修改：x = %f  y = %f  \r\n", triangle.x, triangle.y);
 }
-/*      CHECK
+/*    CHECK
 *       功能：检查移动是否到位
 *       参数：check [1/2/3] value (角度范围为【-180，180】)
 */
@@ -160,3 +161,4 @@ void cmd_show_func(int argc,char *argv[])
   uprintf("参数 k1 = %f  k2 = %f  k3=%f  k4=%f   \r\n", k1,k2,k3,k4);
   uprintf("采样时间time=%d   \r\n", time);
 }
+

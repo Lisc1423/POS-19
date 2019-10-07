@@ -3,24 +3,23 @@
 #include "main.h"
 
 
-/****************************ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½***************************/
+/****************************parameter table***************************/
 
-//LX,LY:ï¿½Ó¶ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½Ê¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½×ªï¿½ï¿½
+//LX,LY:È«ÏòÂÖÖÐÐÄ¾à²Î¿¼µã´¹Ö±¾àÀë
 
-//k1,k2:ï¿½ï¿½lxï¿½ï¿½lyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//k1,k2:LX£¬LYÐÞÕýÏî
 
-//k1,k2:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//k3,k4:È«ÏòÂÖÖ±¾¶ÐÞÕý²ÎÊý
 
-//X,Y,thta,dthta:ï¿½Ó¶ï¿½ï¿½Öµï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ÓµÄ±ï¿½ï¿½ï¿½ï¿½ï¿½Öµ,ï¿½ï¿½Ç°Æ«ï¿½ï¿½ï¿½Ç£ï¿½Æ«ï¿½ï¿½ï¿½Ç±ä»¯Öµ
+//X,Y,thta,dthta:XYÎª±àÂëÆ÷ÒÆ¶¯¾àÀë£¬thtaµ±Ç°Æ«º½½Ç
 
-//dx,dy:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Æ¶ï¿½Öµï¿½ï¿½yï¿½ï¿½ï¿½Æ¶ï¿½Öµ
+//dx,dy:ÊÀ½ç×ø±êÏµÏÂÎ»ÒÆ
 
 /****************************ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½***************************/
 
 float k1 = 0,k2 = 0;
 float k3 = 1,k4 = 1;
-int a=0;
-//ANG:1.020933
+//ANG:1.020933  ³ÉµçºÚÏ»×ÓÍÓÂÝÒÇÐ£×¼ÏµÊý
 
 
 float calcul_dx(float thta,float d_thta,float X,float Y)
@@ -64,16 +63,16 @@ void calcul_XY()
   TIM3->CNT=0;
   TIM4->CNT=0;
   
-  float x = encoder.X*50.5*PI/2048;                //2048ï¿½ß£ï¿½ï¿½Ü³ï¿½50.5PI
+  float x = encoder.X*50.5*PI/2048;                //2048Ïß£¬ÖÜ³¤50.5*PI
   float y = encoder.Y*50.5*PI/2048;
   
   k3 = 1.056604;
   k4 = 1.037778;
-  x *= k3;                                //ï¿½ï¿½ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  x *= k3;                                //¶ÔÖ±¾¶µÄÐÞÕý
   y *= k4; 
   
-  triangle.lastangle=triangle.angle;                    //ï¿½ï¿½Â¼ï¿½ï¿½Ï»ï¿½ï¿½ï¿½Ï´Î´ï¿½ï¿½ØµÄ½Ç¶È£ï¿½ï¿½ï¿½dth
-  triangle.angle=-inputangle;                           //ï¿½ï¿½Ï»ï¿½ï¿½ÎªË³Ê±ï¿½ï¿½Ç¶È£ï¿½È¡ï¿½ï¿½Ê±ï¿½ï¿½Îªï¿½ï¿½
+  triangle.lastangle=triangle.angle;                    //ÓÃÓÚ¼ÆËãdthta
+  triangle.angle=-inputangle;                           //³ÉµçÍÓÂÝÒÇ Ë³Ê±ÕëÎªÕý£¬È¡ÄæÊ±ÕëÎªÕý
   
   float dx = calcul_dx(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);
   float dy = calcul_dy(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,y,y);
@@ -81,7 +80,7 @@ void calcul_XY()
   triangle.x += dx;
   triangle.y += dy;  
   
-  triangle.showangle=-inputangle;                             //ï¿½ï¿½ï¿½ï¿½Ú¡ï¿½-180ï¿½ï¿½180ï¿½ï¿½ï¿½ï¿½Î§ï¿½Ú½Ç¶ï¿½  
+  triangle.showangle=-inputangle;                             //Êä³ö½Ç¶È·¶Î°¡¾-180.180¡¿
   while(triangle.showangle>180||triangle.showangle<-180)
   {
     if(triangle.showangle>180) triangle.showangle-=360;
