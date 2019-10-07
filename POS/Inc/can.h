@@ -47,14 +47,20 @@
 #include "stm32f4xx_hal.h"
 #include "main.h"
 
+#define MTOS1 0x01
+#define MTOS2 0x02
+#define MTOS3 0x03
+#define MTOS4 0x04
+#define MTOS5 0x05
+
 
 /* USER CODE BEGIN Includes */
 typedef union{
     uint8_t u8_form[8];
     int s32_form[2];
     float float_form[2];
-}data;
-extern data candata;
+}canconverdata;
+extern canconverdata candata;
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan1;

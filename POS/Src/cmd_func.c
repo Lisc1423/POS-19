@@ -1,4 +1,5 @@
 #include "cmd_func.h"
+#include "can_func.h"
 #include "flash.h"
 extern Triangle triangle;
 extern Flag flag;
@@ -6,7 +7,32 @@ extern int time;
 
 void cmd_hello_func(int argc,char *argv[])  //hello
 {
-  uprintf("hello world");
+  uprintf("HELLO!");
+}
+
+
+void cmd_version_func(int argc,char *argv[])  //vesion
+{
+  uprintf("VESION 1.0 !");
+}
+
+void cmd_reset_func(int argc,char *argv[])  //vesion                  //!尚未使用过 需测试
+{
+  __set_FAULTMASK(1);   //STM32程序软件复位  
+ NVIC_SystemReset(); 
+}
+
+void cmd_default_func(int argc,char *argv[])  //vesion                  //!尚未使用过 需测试
+{
+k1 = 83;
+k2 = 325;
+k3 = 1.056604;
+k4 = 1.037778;
+time=5;
+//!在此处加入canid默认值
+uprintf("参数 k1 = %f  k2 = %f  k3=%f  k4=%f   \r\n", k1,k2,k3,k4);
+uprintf("采样时间time=%d   \r\n", time);
+ 
 }
 /*       
 *       FLAG
@@ -86,6 +112,20 @@ void cmd_modify_D_func(int argc,char *argv[])
   write_prams();
   uprintf("系数已经修改： k3 = %f  k4 = %f  \r\n",k3,k4);
 }
+
+
+void cmd_modify_CANID_func(int argc,char *argv[])
+{
+
+  CANSEND_ID = (uint32_t)atof(argv[1]);
+  CANRECV_ID = (uint32_t)atof(argv[2]);  
+  
+  flash_data[5]=CANSEND_ID;
+  flash_data[6]=CANRECV_ID;
+  write_prams();
+  uprintf("系数已经修改： CANSEND_ID = %x  CANRECV_ID = %x  \r\n",CANSEND_ID,CANRECV_ID);
+}
+
 /*       PARAM
 *       功能：修改采样时间
 *       参数：time value
@@ -99,24 +139,14 @@ void cmd_change_time_func(int argc,char *argv[])
   uprintf("采样时间修改：%d\r\n",time);
 }
 /*       SET
-*       功能：reset pos
-*       参数：reset
-*/
-void cmd_reset_func(int argc,char *argv[]) 
-{
-  uprintf("reset!\r\n");
-  triangle.x = 0;
-  triangle.y = 0;
-  triangle.angle = 0;
-}
-/*       SET
 *       功能：set xy
 *       参数：setxy x y
 */
-void cmd_setxy_func(int argc,char *argv[])
+void cmd_setxy_func(int argc,char *argv[])                                                          //!带加入角度
 {
   triangle.x= atof(argv[1]);
   triangle.y = atof(argv[2]);
+  //triangle.angle = atof(argv[3]);
   uprintf("xy已经修改：x = %f  y = %f  \r\n", triangle.x, triangle.y);
 }
 /*    CHECK

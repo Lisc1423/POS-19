@@ -1225,6 +1225,9 @@
             <group>
                 <name>user</name>
                 <file>
+                    <name>$PROJ_DIR$\..\Src\ASM330.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\Src\calculate.c</name>
                 </file>
                 <file>
@@ -1244,6 +1247,9 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Src\flash.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\spi.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Src\vega.c</name>
@@ -1299,6 +1305,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>

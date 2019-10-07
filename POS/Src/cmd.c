@@ -4,20 +4,23 @@ static cmd_struct cmd_tbl[] = {
      *存放命令的结构体
      * 若需添加命令，需要在此加上：
      * CMD_ADD("命令名","命令使用方法（可为空格,但不能不加双引号）",对应命令的执行函数名)
-     * 注意最后一个不需要逗号，前面的都需要逗号
+     * 注意最后一个不需要逗号，前面的都需要逗号 
      */
     CMD_ADD("help"," Print all command and usage ",cmd_help_func),
-    CMD_ADD("hello","Print hello",cmd_hello_func),
-    CMD_ADD("read","Print data by set flag=1",cmd_read_func),
-    CMD_ADD("check","check x,y,delta",cmd_check_func),
-    CMD_ADD("modify_L","modify paramter",cmd_modify_L_func),
-    CMD_ADD("modify_D","modify paramter",cmd_modify_D_func),
-    CMD_ADD("reset","reset x,y,delta",cmd_reset_func),
-    CMD_ADD("encoder","read encoder data",cmd_read_encoder_func),
-    CMD_ADD("time","modify time",cmd_change_time_func),
-    CMD_ADD("wave", "show wave", cmd_send_wave_func),
-    CMD_ADD("setxy", "setxy", cmd_setxy_func),
-    CMD_ADD("show", "show param ", cmd_show_func),
+    CMD_ADD("version"," Print current version",cmd_version_func),
+    CMD_ADD("reset"," Reset system",cmd_reset_func),
+    CMD_ADD("default"," Restore the default",cmd_default_func),
+    CMD_ADD("hello","Print HELLO!",cmd_hello_func),
+    CMD_ADD("read","Print x y angle",cmd_read_func),
+    CMD_ADD("check","Check x y angle",cmd_check_func),
+    CMD_ADD("modify_CANID","Modify the sendID and receiveID",cmd_modify_CANID_func),
+    CMD_ADD("modify_L","Modify the distance from the center to the wheel",cmd_modify_L_func),
+    CMD_ADD("modify_D","Modify the diamter of your two wheels",cmd_modify_D_func),
+    CMD_ADD("encoder","Read encoder data",cmd_read_encoder_func),
+    CMD_ADD("time","Modify sampling time",cmd_change_time_func),
+    CMD_ADD("wave", "Show wave", cmd_send_wave_func),
+    CMD_ADD("setxyangle", "Set x y angle", cmd_setxy_func),
+    CMD_ADD("showparam", "Show paramters including distance diamter samplingtime ", cmd_show_func),
 };
 
 

@@ -6,7 +6,8 @@
 #include <stdlib.h>
 
 
-
+uint32_t CANSEND_ID=0x14;
+uint32_t CANRECV_ID=0x11;
 //void callback(CanRxMsgTypeDef* pRxMsg)
 //{
 //  int i;
@@ -49,4 +50,15 @@ void getangle(CanRxMsgTypeDef* pRxMsg)
   }
 }
 
+int send_XY(canconverdata* data){    
+    //int 小端模式，低位存在低地址 
+    data->float_form[0]=triangle.x;
+    data->float_form[1]=triangle.y;
+   return can_send_msg(CANSEND_ID,data->u8_form,8);
+}
 
+int send_Angle(canconverdata* data){    
+    //int 小端模式，低位存在低地址 
+    data->float_form[0]=triangle.showangle;
+   return can_send_msg(CANSEND_ID,data->u8_form,4);
+}

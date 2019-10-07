@@ -1,6 +1,7 @@
 #include "calculate.h"
 #include "encoder.h"
 #include "main.h"
+#include "ASM330.h"
 
 
 /****************************parameter table***************************/
@@ -15,18 +16,19 @@
 
 //dx,dy:世界坐标系下位移
 
-/****************************锟斤拷锟斤拷锟斤拷***************************/
+/***********************************************************************/
 
-float k1 = 0,k2 = 0;
-float k3 = 1,k4 = 1;
+float k1 = 83,k2 = 325;
+float k3 = 1.056604,k4 = 1.037778;
+float asm_offset_cnt = 0;
 //ANG:1.020933  成电黑匣子陀螺仪校准系数
 
 
 float calcul_dx(float thta,float d_thta,float X,float Y)
 {
   
-  float Ly=325+k2;
-  float Lx=83+k1;
+  float Ly=k2;
+  float Lx=k1;
   float s,c;
   s=sin(thta);
   c=cos(thta);    
@@ -37,8 +39,8 @@ float calcul_dx(float thta,float d_thta,float X,float Y)
 float calcul_dy(float thta,float d_thta,float X,float Y)
 {
   
-  float Ly=325+k2;
-  float Lx=83+k1;
+  float Ly=k2;
+  float Lx=k1;
   float s,c;
   s=sin(thta);
   c=cos(thta);    
@@ -46,10 +48,23 @@ float calcul_dy(float thta,float d_thta,float X,float Y)
   return dy;
 }
 
-//float calcul_dth()
+float calcul_dth()
+{
+    float d_thta;
+    d_thta = ASM330_Data();
+    d_thta -= asm_offset_cnt /500;
+    d_thta /= 80.0;
+    d_thta *= (PI/180)*0.01;
+    return d_thta;
+}
+
+
+
 
 void calcul_XY()
 {
+
+//***********************计算两个编码器位移*****************************************//
   if(TIM4->CNT >= 30000)
     encoder.X = (float)TIM4->CNT-65536;
   else
@@ -66,21 +81,27 @@ void calcul_XY()
   float x = encoder.X*50.5*PI/2048;                //2048线，周长50.5*PI
   float y = encoder.Y*50.5*PI/2048;
   
-  k3 = 1.056604;
-  k4 = 1.037778;
   x *= k3;                                //对直径的修正
   y *= k4; 
-  
-  triangle.lastangle=triangle.angle;                    //用于计算dthta
-  triangle.angle=-inputangle;                           //成电陀螺仪 顺时针为正，取逆时针为正
-  
-  float dx = calcul_dx(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);
-  float dy = calcul_dy(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,y,y);
+
+//***********************计算x y th *****************************************//
+  //float dth = calcul_dth();
+  float dx = calcul_dx(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);                                    //  dth改
+  float dy = calcul_dy(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);
+
   
   triangle.x += dx;
   triangle.y += dy;  
+  //triangle.angle += dth;                                                                            //todo为新pcb加入内容
+
+
+  triangle.lastangle=triangle.angle;                    //用于计算dthta                              //!红色备注为新pcb删除内容
+  triangle.angle=-inputangle;                           //成电陀螺仪 顺时针为正，取逆时针为正           //!
   
-  triangle.showangle=-inputangle;                             //输出角度范伟【-180.180】
+
+  
+  triangle.showangle=-inputangle;                             //输出角度范伟【-180.180】              //!
+  //triangle.showangle=triangle.angle;                             //输出角度范伟【-180.180】              //todo
   while(triangle.showangle>180||triangle.showangle<-180)
   {
     if(triangle.showangle>180) triangle.showangle-=360;

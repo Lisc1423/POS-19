@@ -15,7 +15,8 @@ typedef struct Encoder
 extern Encoder encoder;
 void encoder_init(void);      
      
-
+extern int encoderX_dir;
+extern int encoderY_dir;
         
 #ifdef __cplusplus
 }

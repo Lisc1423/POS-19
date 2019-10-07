@@ -51,8 +51,8 @@ CanList canList[50];//����ܼ�50��can���ӣ����Ը�
 CAN_FilterConfTypeDef  sFilterConfig;
 static CanTxMsgTypeDef TxMessage;
 static CanRxMsgTypeDef RxMessage;
-int can_ID;
-data candata;
+
+canconverdata candata;
 void Configure_Filter(void);
 /* USER CODE END 0 */
 
@@ -246,6 +246,13 @@ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
 void can_add_func(void)
 {
   can_add_callback(0X11,getangle);
+  // can_add_callback(MTOS1,fun1);
+  // can_add_callback(MTOS2,fun2);
+  // can_add_callback(MTOS3,fun3);
+  // can_add_callback(MTOS4,fun4);
+
+
+
 }
 /* USER CODE END 1 */
 

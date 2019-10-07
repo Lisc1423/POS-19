@@ -6,6 +6,10 @@
    
 #include "stm32f4xx_hal.h"
 #include "main.h"
+#include "can.h"
+
+extern uint32_t CANSEND_ID;
+extern uint32_t CANRECV_ID;
 
 void callback(CanRxMsgTypeDef* pRxMsg);
 
@@ -20,7 +24,8 @@ typedef union{
 }can_change_msg;
    
 void getangle(CanRxMsgTypeDef* pRxMsg);
-
+int send_Angle(canconverdata* data);
+int send_XY(canconverdata* data);
    
  #ifdef __cplusplus
 }

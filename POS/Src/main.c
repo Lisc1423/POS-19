@@ -48,6 +48,7 @@
 /* USER CODE BEGIN Includes */
 #include "encoder.h"
 #include "calculate.h"
+#include "ASM330.h"
 #include "filter.h"
 /* USER CODE END Includes */
 
@@ -64,7 +65,7 @@ float inputangle;
 void flag_init()
 {
   flag.encoder=0;
-  flag.read=1;
+  flag.read=0;
   flag.wave=0;
 }
 
@@ -111,13 +112,13 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
-  
+  MX_SPI2_Init();
   
   
   /* USER CODE BEGIN 2 */
-  
+  ASM330_Init();
   encoder_init();
-  uprintf("hello£¡\r\n");
+  uprintf("hello?\r\n");
   cmd_init();
   usart_init();
   load_prams();
@@ -137,7 +138,7 @@ int main(void)
     {     
       calcul_XY();
       if(flag.encoder == 1)
-        uprintf("x=%f          y=%f     \r\n",encoder.X,encoder.Y);  
+        uprintf("x=%f          y=%f      \r\n",encoder.X,encoder.Y);  
       if(flag.wave==1)
         send_wave(triangle.x,0,triangle.y,triangle.showangle);      
     }

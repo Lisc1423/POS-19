@@ -1,7 +1,7 @@
 #include "flash.h"
 #include "usart.h"
 #include "math.h"
-
+#include "can_func.h"
 #include "calculate.h"
 #include "main.h"
 
@@ -70,6 +70,8 @@ void load_prams()
   k3=flash_data[2];
   k4=flash_data[3];
   time=(int)flash_data[4];
+  CANSEND_ID=(uint32_t) flash_data[5];
+  CANRECV_ID=(uint32_t) flash_data[6];
 
 //  canmtrid = (int)flash_data[17];
 }

@@ -152,7 +152,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
+#include "stm32f4xx_hal_spi.h"
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
   */

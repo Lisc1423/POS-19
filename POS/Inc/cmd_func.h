@@ -12,12 +12,15 @@
 #include "calculate.h"
 #include "encoder.h"
    
-void cmd_hello_func(int argc,char *argv[]);  
+void cmd_hello_func(int argc,char *argv[]); 
+void cmd_version_func(int argc,char *argv[]) ; 
+void cmd_reset_func(int argc,char *argv[]) ;
+void cmd_default_func(int argc,char *argv[]); 
 void cmd_read_func(int argc,char *argv[]);
 void cmd_check_func(int argc,char *argv[]);
+void cmd_modify_CANID_func(int argc,char *argv[]);
 void cmd_modify_L_func(int argc,char *argv[]);
 void cmd_modify_D_func(int argc,char *argv[]);
-void cmd_reset_func(int argc,char *argv[]);
 void cmd_read_encoder_func(int argc,char *argv[]);
 void cmd_change_time_func(int argc,char *argv[]);
 void cmd_send_wave_func(int argc,char *argv[]);
