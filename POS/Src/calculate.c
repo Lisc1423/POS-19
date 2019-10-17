@@ -17,7 +17,8 @@
 //dx,dy:世界坐标系下位移
 
 /***********************************************************************/
-
+int encoderX_dir=1;
+int encoderY_dir=1;
 float k1 = 83,k2 = 325;
 float k3 = 1.056604,k4 = 1.037778;
 float asm_offset_cnt = 0;
@@ -78,8 +79,8 @@ void calcul_XY()
   TIM3->CNT=0;
   TIM4->CNT=0;
   
-  float x = encoder.X*50.5*PI/2048;                //2048线，周长50.5*PI
-  float y = encoder.Y*50.5*PI/2048;
+  float x = encoderX_dir*encoder.X*50.5*PI/2048;                //2048线，周长50.5*PI
+  float y = encoderY_dir*encoder.Y*50.5*PI/2048;
   
   x *= k3;                                //对直径的修正
   y *= k4; 

@@ -71,18 +71,26 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define CSNM_Pin GPIO_PIN_13
-#define CSNM_GPIO_Port GPIOC
-#define CSN1_Pin GPIO_PIN_14
-#define CSN1_GPIO_Port GPIOC
-#define CSN2_Pin GPIO_PIN_15
-#define CSN2_GPIO_Port GPIOC
-#define RING_Pin GPIO_PIN_0
-#define RING_GPIO_Port GPIOB
-#define T_3_4LED_PWM_Pin GPIO_PIN_1
-#define T_3_4LED_PWM_GPIO_Port GPIOB
+#define CSNM2_Pin GPIO_PIN_13
+#define CSNM2_GPIO_Port GPIOC
+#define CSNM3_Pin GPIO_PIN_14
+#define CSNM3_GPIO_Port GPIOC
+#define CSNM1_Pin GPIO_PIN_15
+#define CSNM1_GPIO_Port GPIOC
+#define CLK1_Pin GPIO_PIN_5
+#define CLK1_GPIO_Port GPIOA
+#define MISO1_Pin GPIO_PIN_6
+#define MISO1_GPIO_Port GPIOA
+#define MOSI1_Pin GPIO_PIN_7
+#define MOSI1_GPIO_Port GPIOA
 #define KEY1_Pin GPIO_PIN_9
 #define KEY1_GPIO_Port GPIOA
+#define CLK3_Pin GPIO_PIN_10
+#define CLK3_GPIO_Port GPIOC
+#define MISO3_Pin GPIO_PIN_11
+#define MISO3_GPIO_Port GPIOC
+#define MOSI3_Pin GPIO_PIN_12
+#define MOSI3_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

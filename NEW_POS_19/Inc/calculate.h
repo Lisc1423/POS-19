@@ -23,11 +23,10 @@ extern Triangle triangle;
 float calcul_dx(float thta,float d_thta,float X1,float X2);
 float calcul_dy(float thta,float d_thta,float X1,float X2);
 void calcul_XY();
+float angle_toshow(float angle);
 
-extern float k1,k2;
-extern float k3,k4;
-extern int encoderX_dir;
-extern int encoderY_dir;
+extern float kx_center,ky_center;
+extern float X_diameter,y_diameter;
 
 #ifdef __cplusplus
 }

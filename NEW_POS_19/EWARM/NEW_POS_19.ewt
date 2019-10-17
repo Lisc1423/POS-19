@@ -1196,6 +1196,24 @@
         <group>
             <name>User</name>
             <group>
+                <name>calcul</name>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\as5047p.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\calculate.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\encoder.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\filter.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Src\imitate_spi.c</name>
+                </file>
+            </group>
+            <group>
                 <name>connectivity</name>
                 <file>
                     <name>$PROJ_DIR$\..\Src\can_func.c</name>
@@ -1253,19 +1271,10 @@
                 </file>
             </group>
             <file>
-                <name>$PROJ_DIR$\..\Src\as5047p.c</name>
+                <name>$PROJ_DIR$\..\Src\asm330lhh_reg.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Src\ASM330.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\calculate.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\encoder.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Src\filter.c</name>
+                <name>$PROJ_DIR$\..\Src\read_data_simple.c</name>
             </file>
         </group>
     </group>
@@ -1281,6 +1290,9 @@
             <name>STM32F4xx_HAL_Driver</name>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_adc_ex.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</name>

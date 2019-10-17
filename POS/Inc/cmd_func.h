@@ -26,6 +26,8 @@ void cmd_change_time_func(int argc,char *argv[]);
 void cmd_send_wave_func(int argc,char *argv[]);
 void cmd_setxy_func(int argc,char *argv[]);
 void cmd_show_func(int argc,char *argv[]);
+void cmd_encoderXdir_func(int argc,char *argv[]);
+void cmd_encoderYdir_func(int argc,char *argv[]);
 #ifdef __cplusplus
 }
 #endif

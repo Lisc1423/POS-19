@@ -168,6 +168,7 @@ void uprintf(char *fmt, ...) {
         HAL_Delay(10);
     }
     // TODO:	ZeroVoid	due:10/7	优化输出，异步输出，可能纯在busy时再次调用，会被忽略，输出缺失
+   // HAL_Delay(0);
     while(CMD_USART.hdmatx->State != HAL_DMA_STATE_READY);
     //HAL_UART_Transmit(&CMD_USART, (uint8_t*)uart_buffer, size, 1000);
 }

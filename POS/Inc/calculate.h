@@ -26,6 +26,8 @@ void calcul_XY();
 
 extern float k1,k2;
 extern float k3,k4;
+extern int encoderX_dir;
+extern int encoderY_dir;
 
 #ifdef __cplusplus
 }

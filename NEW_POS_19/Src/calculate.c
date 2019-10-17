@@ -2,34 +2,54 @@
 #include "encoder.h"
 #include "main.h"
 #include "ASM330.h"
+#include "as5047p.h"
+
+typedef struct  Position
+{
+  int cnt_x;
+  int cnt_y;
+  float angle_x;
+  float angle_y;
+}Position;  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /****************************parameter table***************************/
 
 //LX,LY:全向轮中心距参考点垂直距离
 
-//k1,k2:LX，LY修正项
+//kx_center,ky_center:LX，LY修正项
 
-//k3,k4:全向轮直径修正参数
+//X_diameter,y_diameter:全向轮直径修正参数
 
 //X,Y,thta,dthta:XY为编码器移动距离，thta当前偏航角
 
 //dx,dy:世界坐标系下位移
 
 /***********************************************************************/
-int encoderX_dir=1;
-int encoderY_dir=1;
-float k1 = 83,k2 = 325;
-float k3 = 1.056604,k4 = 1.037778;
+float kx_center = 83,ky_center = 325;
+float X_diameter = 1.056604,y_diameter = 1.037778;
 float asm_offset_cnt = 0;
-//ANG:1.020933  成电黑匣子陀螺仪校准系数
 
 
 float calcul_dx(float thta,float d_thta,float X,float Y)
 {
   
-  float Ly=k2;
-  float Lx=k1;
+  float Ly=ky_center;
+  float Lx=kx_center;
   float s,c;
   s=sin(thta);
   c=cos(thta);    
@@ -40,8 +60,8 @@ float calcul_dx(float thta,float d_thta,float X,float Y)
 float calcul_dy(float thta,float d_thta,float X,float Y)
 {
   
-  float Ly=k2;
-  float Lx=k1;
+  float Ly=ky_center;
+  float Lx=kx_center;
   float s,c;
   s=sin(thta);
   c=cos(thta);    
@@ -60,12 +80,10 @@ float calcul_dth()
 }
 
 
-
-
 void calcul_XY()
 {
 
-//***********************计算两个编码器位移*****************************************//
+  //***********************计算两个编码器位移*****************************************//
   if(TIM4->CNT >= 30000)
     encoder.X = (float)TIM4->CNT-65536;
   else
@@ -79,13 +97,13 @@ void calcul_XY()
   TIM3->CNT=0;
   TIM4->CNT=0;
   
-  float x = encoderX_dir*encoder.X*50.5*PI/2048;                //2048线，周长50.5*PI
-  float y = encoderY_dir*encoder.Y*50.5*PI/2048;
+  float x = encoder.encoderX_dir*encoder.X*50.5*PI/2048;                //2048线，周长50.5*PI
+  float y = encoder.encoderY_dir*encoder.Y*50.5*PI/2048;
   
-  x *= k3;                                //对直径的修正
-  y *= k4; 
+  x *= X_diameter;                                //对直径的修正
+  y *= y_diameter; 
 
-//***********************计算x y th *****************************************//
+  //***********************计算x y th *****************************************//
   //float dth = calcul_dth();
   float dx = calcul_dx(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);                                    //  dth改
   float dy = calcul_dy(triangle.angle*PI/180,(triangle.angle-triangle.lastangle)*PI/180,x,y);
@@ -101,12 +119,17 @@ void calcul_XY()
   
 
   
-  triangle.showangle=-inputangle;                             //输出角度范伟【-180.180】              //!
-  //triangle.showangle=triangle.angle;                             //输出角度范伟【-180.180】              //todo
-  while(triangle.showangle>180||triangle.showangle<-180)
+  triangle.showangle=angle_toshow(-inputangle);                             //输出角度范伟【-180.180】              //!
+}
+
+float angle_toshow(float angle)
+{
+  float showangle=0;
+  showangle=angle;
+  while(showangle>180||showangle<-180)
   {
-    if(triangle.showangle>180) triangle.showangle-=360;
-    if(triangle.showangle<=-180) triangle.showangle+=360;
+    if(showangle>180)showangle-=360;
+    if(showangle<=-180)showangle+=360;
   }
-  
+  return showangle;
 }

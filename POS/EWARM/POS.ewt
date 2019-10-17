@@ -1225,6 +1225,9 @@
             <group>
                 <name>user</name>
                 <file>
+                    <name>$PROJ_DIR$\..\Src\as5047p.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\Src\ASM330.c</name>
                 </file>
                 <file>

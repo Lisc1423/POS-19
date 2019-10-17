@@ -37,11 +37,14 @@
 #include "filter.h"
 #include "flash.h"
 #include "simplelib.h"
+#include "as5047p.h"
+    
+    #include "Asm330lhh.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+extern void example_main_asm330lhh(void);
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -72,10 +75,10 @@ Encoder encoder;
 Triangle triangle;
 Flag flag;
 
-static uint32_t time_ms;
+static uint32_t time_ms = 0;
 int time = 5;
 
-float inputangle;
+float inputangle;                                   //!删除
 
 void flag_init()
 {
@@ -118,42 +121,57 @@ int main(void)
   MX_DMA_Init();
   MX_CAN1_Init();
   MX_I2C3_Init();
-  MX_SPI1_Init();
   MX_SPI2_Init();
-  MX_SPI3_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
   MX_USART2_UART_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-  ASM330_Init();
-  encoder_init();
-  uprintf("hello?\r\n");
   simplelib_init(&huart2, &hcan1);
+  //ASM330_Init();                                          //！待�??????????????�??????????????
+  encoder_init();    
+  uprintf("hello\r\n");
   load_prams();
   flag_init();
-  //filter_init();
-  
+   //filter_init();
+
+   //HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+   //HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  example_main_asm330lhh();
   while (1)
   {
-    simplelib_run();
     
-    if(time_ms%time==0)
+    uint16_t x=0,y=0;
+    simplelib_run();
+    if(time_ms%5==0)
     {     
+
+      //x=ias5047p_Get_Position_x();
+      //y=ias5047p_Get_Position_y();
       calcul_XY();
       if(flag.encoder == 1)
         uprintf("x=%f          y=%f      \r\n",encoder.X,encoder.Y);  
       if(flag.wave==1)
         send_wave(triangle.x,0,triangle.y,triangle.showangle);      
     }
+    if(time_ms%500==0)
+    {
+
+      if(flag.encoder == 1)
+        uprintf("x=%f          y=%f      \r\n",encoder.X,encoder.Y);
+    }
     if(time_ms%1000==0)
     {
+      //uprintf("x%f\r\ny%f\r\nz%f\r\n",angular_rate_mdps[0],angular_rate_mdps[1],angular_rate_mdps[2]);
+      //uprintf("x%d\r\n",x);
+      //uprintf("y%d\r\n",y);
       if(flag.read==1)
-        uprintf("x=%f     y=%f     angle=%f\r\n",triangle.x,triangle.y,triangle.showangle);
+        uprintf("x=%f     y=%f     angle=%f\r",triangle.x,triangle.y,triangle.showangle);
     }
     /* USER CODE END WHILE */
 
@@ -205,7 +223,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_SYSTICK_Callback(void)
+void HAL_IncTick(void)
 {  
   time_ms++;  
   if(time_ms>=64000)

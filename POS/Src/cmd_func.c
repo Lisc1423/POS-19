@@ -1,6 +1,10 @@
 #include "cmd_func.h"
 #include "can_func.h"
 #include "flash.h"
+#include "tim.h"
+#include "calculate.h"
+
+
 extern Triangle triangle;
 extern Flag flag;
 extern int time;
@@ -192,3 +196,50 @@ void cmd_show_func(int argc,char *argv[])
   uprintf("采样时间time=%d   \r\n", time);
 }
 
+void cmd_encoderXdir_func(int argc,char *argv[])
+{
+  HAL_Delay(1500);
+  int dir=0;
+  float cnt=0;
+  for(int i=0;i<20;i++)
+  {
+  TIM4->CNT=0;
+  HAL_Delay(50);
+  if(TIM4->CNT >= 30000)
+    cnt = (float)TIM4->CNT-65536;
+  else
+    cnt = (float)TIM4->CNT; 
+  if(cnt>0)
+    dir +=1;
+  if(cnt<0)
+    dir -=1;
+  } 
+  if(dir>=0) 
+  encoderX_dir = 1;
+  else 
+  encoderX_dir = -1;  
+}
+
+void cmd_encoderYdir_func(int argc,char *argv[])
+{
+  HAL_Delay(1500);
+  int dir=0;
+  float cnt=0;
+  for(int i=0;i<20;i++)
+  {
+  TIM4->CNT=0;
+  HAL_Delay(50);
+  if(TIM4->CNT >= 30000)
+    cnt = (float)TIM4->CNT-65536;
+  else
+    cnt = (float)TIM4->CNT; 
+  if(cnt>0)
+    dir +=1;
+  if(cnt<0)
+    dir -=1;
+  } 
+  if(dir>=0) 
+  encoderY_dir = 1;
+  else 
+  encoderY_dir = -1;  
+}

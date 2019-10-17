@@ -5,10 +5,12 @@
 #include "calculate.h"
 #include "main.h"
 #include "cmd.h"
+#include "can_func.h"
+#include "encoder.h"
 
 //如果不成功，就有�?能是FLASH的大小和地址设置�?题�?
 
-#define FLASH_Start 0x08020000   
+#define FLASH_Start 0x080A0000   
 
 //#define FLASH_Start 0x08000000 //  注意每�?�都要查一下手册的flash起�?�地址
 
@@ -34,8 +36,9 @@ void write_prams()
   HAL_FLASH_Unlock();//解锁flash
   
   EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;//选择页擦除还�?块擦除，这里�?页擦�?
-  EraseInitStruct.Sector=STMFLASH_GetFlashSector(FLASH_SAVE_ADDR);
+  EraseInitStruct.Sector=STMFLASH_GetFlashSector(FLASH_Start);
   EraseInitStruct.NbSectors=1;   //擦除的页�?
+  EraseInitStruct.VoltageRange=FLASH_VOLTAGE_RANGE_1;
   
   if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)//调用擦除函数
   { 
@@ -66,12 +69,14 @@ void load_prams()
     if(isnan(flash_data[i])) flash_data[i] = 0;
   }	
   uprintf("\r\n");
-  k1=flash_data[0];
-  k2=flash_data[1];
-  k3=flash_data[2];
-  k4=flash_data[3];
+  kx_center=flash_data[0];
+  ky_center=flash_data[1];
+  X_diameter=flash_data[2];
+  y_diameter=flash_data[3];
   time=(int)flash_data[4];
-
+  CANSEND_ID=(uint16_t)flash_data[5];
+  encoder.encoderX_dir=(int)flash_data[6];
+  encoder.encoderY_dir=(int)flash_data[7];
 //  canmtrid = (int)flash_data[17];
 }
 
