@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "G:\SOFTWARE\IAR\common\bin\cspybat" -f "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.general.xcl" --backend -f "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.driver.xcl" 
+& "G:\SOFTWARE\IAR\common\bin\cspybat" -f "E:\ROBOCON------VALLUE\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.general.xcl" --backend -f "E:\ROBOCON------VALLUE\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.driver.xcl" 
 }
 else
 {
-& "G:\SOFTWARE\IAR\common\bin\cspybat" -f "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.driver.xcl" 
+& "G:\SOFTWARE\IAR\common\bin\cspybat" -f "E:\ROBOCON------VALLUE\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.general.xcl" --debug_file=$debugfile --backend -f "E:\ROBOCON------VALLUE\NEW_POS_19\EWARM\settings\NEW_POS_19.NEW_POS_19.driver.xcl" 
 }

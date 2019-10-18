@@ -16,7 +16,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>186396799</Checksum>
+        <Checksum>1229177194</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -112,9 +112,7 @@
         <mode>0</mode>
     </DisassembleMode>
     <Breakpoints2>
-        <Bp0>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\read_data_simple.c}.228.7" 0 0 1 "" 0 "" 0</Bp0>
-        <Bp1>_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\read_data_simple.c}.159.5" 0 0 1 "" 0 "" 0</Bp1>
-        <Count>2</Count>
+        <Count>0</Count>
     </Breakpoints2>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
@@ -126,7 +124,10 @@
         <Category>_ 0</Category>
     </LogFile>
     <Aliases>
-        <Count>0</Count>
+        <A0>_ "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c" ""</A0>
+        <A1>_ "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c" ""</A1>
+        <A2>_ "C:\Users\DELL\Desktop\陀螺仪硬件spi\NEW_POS_19\Src\main.c" ""</A2>
+        <Count>3</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
     <DriverProfiling>

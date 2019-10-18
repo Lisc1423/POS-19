@@ -97,10 +97,11 @@ static int32_t platform_read(void *handle, uint8_t Reg, uint8_t *Bufp,
 #ifdef MKI109V2
    if (handle == &hspi2)
   {
-    uint16_t reg = (uint16_t)Reg |0x80;
-    reg=reg<<8;
+//    uint16_t reg = (uint16_t)Reg |0x80;
+//    reg=reg<<8;
+    Reg |=0x80;
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-    HAL_SPI_Transmit(handle, (uint8_t*)&reg, 1, 1000);
+    HAL_SPI_Transmit(handle, (uint8_t*)&Reg, 1, 1000);
     HAL_SPI_Receive(handle, Bufp, len, 1000);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
   }
@@ -244,9 +245,9 @@ void example_main_asm330lhh(void)
       angular_rate_mdps[2] =
     		  asm330lhh_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[2]);
 
-      //uprintf("%f\r\n",angular_rate_mdps[0]);
-      //uprintf("%f\r\n",angular_rate_mdps[1]);
-     // uprintf("%f\r\n",angular_rate_mdps[2]);
+      uprintf("%f\r\n",angular_rate_mdps[0]);
+      uprintf("%f\r\n",angular_rate_mdps[1]);
+      uprintf("%f\r\n",angular_rate_mdps[2]);
     }
     
   }
